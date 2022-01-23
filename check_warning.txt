@@ -1,0 +1,47 @@
+#!/bin/bash
+
+countfiles=$(ls /tmp/ | wc -l)
+
+if (($countfiles<=10)); then
+                echo "OK - $countfiles services are ok"
+                exit 0
+        elif ((11<=$countfiles && $countfiles<=20)); then
+                echo "WARNING STATE - $countfiles"
+                exit 1
+        elif ((20<=$countfiles)); then
+                echo "CRITICAL STATE - $countfiles"
+                exit 2
+        else
+                echo "UNKNOWN - $countfiles"
+                exit 3
+fi
+
+
+==============================================================
+# check webex pro(mp4)
+
+#!/bin/bash
+
+countfiles=$(ls /WebEx/Cogni/pro/*.mp4 | wc -l)
+echo "pro count - $countfiles"
+
+==============================================================
+# check webex op(mp4)
+
+#!/bin/bash
+
+countfiles=$(ls /home/kpoint/webexop/ | wc -l)
+echo "webexop count - $countfiles"
+
+==============================================================
+# check webex src(wmv)
+
+#!/bin/bash
+
+countfiles=$(ls /home/kpoint/webexsource/ | wc -l)
+echo "webexsrc count - $countfiles"
+
+
+
+
+

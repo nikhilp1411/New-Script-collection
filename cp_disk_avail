@@ -1,0 +1,25 @@
+#!/bin/bash
+
+DiskAvail=$(df -h / | grep -v Filesystem | awk '{print $4'} | sed 's/G//g')
+TOT=$(df -h / | grep -v Filesystem | awk '{print $2'} | sed 's/G//g')
+
+if (($DiskAvail<=2)); then
+
+	echo "CRITICAL STATE - ${DiskAvail}GB (${DiskAvail}GB out of ${TOT}GB)"
+	exit 2	
+
+   elif (($DiskAvail<=10)); then
+
+	echo "WARNING STATE - ${DiskAvail}GB (${DiskAvail}GB out of ${TOT}GB)"
+	exit 1	
+
+   elif (($DiskAvail>=20)); then
+
+	echo "OK - ${DiskAvail}GB (${DiskAvail}GB out of ${TOT}GB)"
+	exit 0
+
+   else
+
+	echo "UNKNOWN - ${DiskAvail}GB (${DiskAvail}GB out of ${TOT}GB)"
+	exit 3
+fi

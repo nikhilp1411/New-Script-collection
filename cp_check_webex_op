@@ -1,0 +1,6 @@
+#!/bin/bash
+#date:- 1 aug 2020
+countfiles=$(ls /home/kpoint/webexop/ | wc -l)
+
+echo "webexop count - $countfiles"
+

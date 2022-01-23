@@ -1,0 +1,13 @@
+#!/bin/bash
+#date:- 1 aug 2020
+
+countfiles=$(ls /WebEx/Cogni/pro/*.mp4 | wc -l)
+SERVICE="ffmpeg"
+echo "pro count - $countfiles"
+
+if  pgrep -x "$SERVICE" >/dev/null 
+ then
+
+exit 1
+
+fi

@@ -1,0 +1,3 @@
+cd /temp/logs/
+
+grep -ls 'ERROR'  Server.log | wc -l

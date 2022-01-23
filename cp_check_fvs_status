@@ -1,0 +1,15 @@
+#!/bin/bash
+
+SERVICE="ffmpeg"
+Current_vid=$(ps aux | grep -i  ffmpeg | grep -i wmv | awk '{print $13}' | cut -b 18-)
+
+if pgrep -x "$SERVICE" >/dev/null
+
+then
+    echo "FVS is running [ Video INP - ${Current_vid} ]"
+    exit 1
+
+else
+    echo "FVS is not running"
+    
+fi

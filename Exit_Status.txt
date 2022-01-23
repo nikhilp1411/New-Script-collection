@@ -1,0 +1,64 @@
+#! /usr/bin/perl -w
+
+# 0 = ok
+# 1 = warn
+# 2 = crit
+# 3 = unknown
+
+my $debug = 0;
+
+use lib "/usr/local/nagios/libexec" ;
+use Getopt::Std;
+use strict;
+use warnings;
+use utils qw( %ERRORS);
+my $VERSION = '0.2';
+
+%ERRORS=('OK'=>0,'WARNING'=>1,'CRITICAL'=>2,'UNKNOWN'=>3);
+my $exit_value = $ERRORS{'UNKNOWN'} ;
+
+my %options=();
+
+getopts("f:w:c:", \%options);
+
+my $warnVal=$options{'w'};
+my $critVal=$options{'c'};
+my $filePath=$options{'f'};
+my $exit_value_human="";
+
+my $cnt=`/usr/local/nagios/libexec/yourCount.sh`;
+
+
+if (($cnt >= $critVal))
+{
+	$exit_value = $ERRORS{'CRITICAL'};
+} 
+elsif (($cnt >= $warnVal))
+{
+	$exit_value = $ERRORS{'WARNING'};
+}
+
+elsif (($cnt < $warnVal) && ($cnt < $critVal))
+{
+	$exit_value = $ERRORS{'OK'};
+}
+
+if ($exit_value == 0)
+{
+  $exit_value_human="OK";    
+}
+elsif ($exit_value == 1)
+{
+  $exit_value_human="WARNING";    
+}
+elsif ($exit_value == 2)
+{
+  $exit_value_human="CRITICAL";    
+}
+elsif ($exit_value == 3)
+{
+  $exit_value_human="UNKNOWN";    
+}
+
+exit $exit_value;
+		

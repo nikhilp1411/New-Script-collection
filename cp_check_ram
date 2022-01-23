@@ -1,0 +1,31 @@
+#!/bin/bash
+#Date:- 1 Aug 2020
+
+total_ram=$(free -mh | grep  Mem: | awk '{print $2}')
+used_rm=$(free -mh | grep  Mem: | awk '{print $3}')
+free_ram=$(free -mh | grep  Mem: | awk '{print $4}')
+free_ram1=$(free -mh | grep  Mem: | awk '{print $4}' | sed 's/M//g')
+shared_ram=$(free -mh | grep  Mem: | awk '{print $5}')
+buff_cache=$(free -mh | grep  Mem: | awk '{print $6}')
+available=$(free -mh | grep  Mem: | awk '{print $7}')
+
+
+echo "Mem: Total-$total_ram, Used-$used_rm, Free-$free_ram, Shared-$shared_ram, buff/cache-$buff_cache, available-$available"
+
+if (($free_ram1<=100)); then
+
+	echo "CRITICAL STATE - Free memory-${free_ram1}M"
+	exit 2
+
+   elif (($free_ram1<=500)); then
+
+	echo "WARNING STATE - Free memory-${free_ram1}M"
+        exit 1
+
+   elif (($free_ram1>=500)); then
+	
+	echo "OK - Free memory-${free_ram}M"
+        exit 0
+
+fi
+
