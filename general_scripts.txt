@@ -1,0 +1,19 @@
+#!/bin/sh
+IFS=","
+while read g_conf_id id
+
+do
+
+GET "http://localhost:9010/wx/kapsule/artifacts/gettranscriptpath?user=siteadmin&domain=bajajfinserv.kpoint.com&gconfid=$g_conf_id&id=&id"
+mv /opt/lepoard/orgs/bajajfinserv.kpoint.com/tmp/transcript-*.srt /tmp/bajaj-transcript-set3/$g_conf_id.srt
+
+done < /tmp/bajaj-transcript-ids.csv
+
+#!/bin/bash
+IFS=","
+
+while read name id
+
+do
+echo $name $id
+done < change_name.csv

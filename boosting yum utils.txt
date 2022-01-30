@@ -1,0 +1,77 @@
+https://www.tecmint.com/linux-yum-package-management-with-yum-utils/
+
+1. Installing yum-utils in RHEL/CentOS
+# yum update && yum install yum-utils
+
+Explore Utilities Provided by yum-utils Package
+
+
+1. Debug a Package
+
+# gdb $(which figlet)
+
+2. Find Repository of Installed Packages
+
+-bash-4.1#  find-repos-of-install figlet
+
+Loaded plugins: fastestmirror
+figlet-2.2.5-9.el6.x86_64 from repo epel
+
+
+3. Remove Duplicate or Orphaned Packages
+
+# package-cleanup --orphans
+
+# package-cleanup --oldkernels
+
+
+4. Find Out Package Dependency List
+
+# repo-graph --repoid=updates | less
+
+
+5. Check List of Unresolved Dependencies
+
+
+# repoclosure
+
+
+6. How to Check Newest or Oldest Packages in a Directory
+
+# ls -l
+# cd rpms
+# ls -l rpms
+# repomanage rpms
+
+
+7. Query Yum Repositories to Get Information about Package
+
+# which htop
+# rpm -qa | grep htop
+
+
+8. Dump All Installed RPM Packages into Zip File
+
+# yum-debug-dump
+
+As with any compressed text file, we can view its contents using zless command:
+
+
+# zless yum_debug_dump-mail.linuxnewz.com-2015-11-27_08:34:01.txt.gz
+
+Should you need to restore the configuration information provided by yum-debug-dump, you can use yum-debug-restore to do so:
+
+
+# yum-debug-restore yum_debug_dump-mail.linuxnewz.com-2015-11-27_08:34:01.txt.gz
+
+
+9. Downloading Source RPMs from Yum Repositories
+
+# mkdir htop-files
+# cd htop-files
+# yumdownloader --resolve htop
+# rpm -Uvh 
+
+
+10. Synchronize a Remote Yum Repository to a Local Directory
+

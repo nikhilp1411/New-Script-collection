@@ -1,0 +1,23 @@
+cd /etc/profile.d
+vim mot.d.sh
+figlet -f big -w 100  "Welcome to VM .94"
+
+chmod 766 mot.d.sh
+
+
+note : figlet should be installed
+
+
+modified 
+
+#!bin/bash
+
+Cyan='\e[36m'
+Stop='\e[0m'
+
+printf "${Cyan}"
+
+figlet -f standard -w 100 -c Welcome to
+figlet -f standard -w 100 -c NTRO
+
+printf "${Stop}"

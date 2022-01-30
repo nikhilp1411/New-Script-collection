@@ -1,0 +1,29 @@
+#!/bin/bash
+
+SERVICE=httpd
+
+if pgrep -x $SERVICE > /dev/null
+then
+        echo "Webserver is already insalled"
+else
+        echo "Going to install webserver"
+
+                yum update -y
+                yum install httpd -y
+                systemctl start httpd
+fi
+
+sleep 15
+
+date_time=$(date)
+cat << HTML > /var/www/html/index.html
+<html>
+<h1>This is AWS VM. Todays date:$date_time</h1>
+<h1>HOSTNAME is : `hostname`
+</html>
+HTML
+if [[ $? -eq 0 ]]
+then
+        echo
+        echo "Script executed successfully"
+fi
